@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder portrait">
+<rect width="200" height="200" fill="#ffe0ee"/>
+<path d="M60 112c-4-40 14-68 40-68s46 26 42 68l4 34H56z" fill="#251a14"/>
+<path d="M34 200c6-38 34-56 66-56s60 18 66 56z" fill="#ff5fa2" stroke="#d9d1c4" stroke-width="1.5"/>
+<path d="M118 148c20 8 34 25 40 52h-22z" fill="#ffffff"/>
+<rect x="89" y="124" width="22" height="24" rx="9" fill="#c08b66"/>
+<ellipse cx="100" cy="101" rx="30" ry="34" fill="#c08b66"/>
+<path d="M66 98c4-26 17-38 34-38s30 12 34 38c-9-13-22-19-34-19s-25 7-34 19z" fill="#251a14"/>
+<circle cx="89" cy="103" r="3" fill="#2a1d17"/><circle cx="111" cy="103" r="3" fill="#2a1d17"/>
+<path d="M91 117q9 7 18 0" stroke="#6e2c2c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+<circle cx="100" cy="89" r="1.8" fill="#b23a2b"/>
+</svg>
