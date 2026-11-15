@@ -276,3 +276,31 @@ footer.site .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 p.center{margin-inline:auto}
+
+/* ---------- home hero (from the first design) ---------- */
+.hero1{padding-block:64px 110px;overflow:hidden;background:
+  radial-gradient(circle at 6% 20%,#FFE6A8 0 120px,transparent 121px),
+  radial-gradient(circle at 94% 10%,#D9E8FF 0 165px,transparent 166px),
+  radial-gradient(circle at 86% 96%,#FFD9E8 0 130px,transparent 131px),#FFFAF2}
+.hero1 .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
+.hero1 .wrap>*{min-width:0}
+.hero1 h1{font-size:clamp(2.6rem,5.4vw,4.2rem);color:#14348A}
+.hero1 .lead{font-size:1.18rem;margin-bottom:28px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--coral-d);background:#FFEEE9;padding:6px 14px;border-radius:99px;margin-bottom:14px}
+.btn-pop{box-shadow:0 8px 20px rgba(239,111,87,.35)}
+.btn-wa{background:#25D366;color:#fff}
+.btn-wa:hover{background:#1FB857}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.badges span{background:#fff;border-radius:99px;padding:8px 14px;font-weight:700;font-size:.9rem;box-shadow:0 4px 14px rgba(29,35,64,.08)}
+.h1-art{position:relative;min-height:520px}
+.h1-art .ph{position:absolute;border-radius:28px;overflow:hidden;box-shadow:0 10px 30px rgba(29,35,64,.12);border:6px solid #fff}
+.h1-art .ph img{width:100%;height:100%;object-fit:cover}
+.h1-art .p1{width:72%;height:62%;top:0;right:0;transform:rotate(2deg)}
+.h1-art .p2{width:50%;height:46%;bottom:0;left:0;transform:rotate(-4deg)}
+.h1-art .p3{width:42%;height:38%;bottom:4%;right:4%;transform:rotate(3deg)}
+.sticker{position:absolute;background:#fff;border-radius:18px;padding:12px 16px;box-shadow:0 10px 30px rgba(29,35,64,.12);font-weight:800;display:flex;gap:10px;align-items:center;z-index:2;font-size:.95rem;color:var(--ink)}
+.sticker .big{font-family:var(--display);font-size:1.7rem;color:var(--coral);line-height:1}
+.sticker.s1{top:52%;left:-4%}
+.sticker.s2{top:-2%;left:10%}
+@media(max-width:900px){.hero1{padding-block:44px 80px}.hero1 .wrap{grid-template-columns:1fr;gap:36px}.h1-art{min-height:420px}.sticker.s1{left:0}}
+@media(max-width:480px){.h1-art{min-height:360px}.sticker{font-size:.85rem;padding:10px 12px}.sticker.s2{left:4%}}
