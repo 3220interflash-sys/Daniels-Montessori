@@ -75,3 +75,65 @@ document.querySelectorAll('form[data-send]').forEach(f => f.addEventListener('su
   a.href = href; a.target = '_blank'; a.rel = 'noopener';
   document.body.appendChild(a); a.click(); a.remove();
 }));
+
+/* ---------- motion: photos and cards ease in as they scroll into view ---------- */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function () {
+  const items = document.querySelectorAll('[data-anim]');
+  if (!items.length || reduceMotion || !('IntersectionObserver' in window)) return;
+  // anything already on screen stays visible; only content further down animates in
+  items.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in'); });
+  document.documentElement.classList.add('anim');
+  const obs = new IntersectionObserver(es => es.forEach(x => {
+    if (x.isIntersecting) { x.target.classList.add('in'); obs.unobserve(x.target); }
+  }), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(el => { if (!el.classList.contains('in')) obs.observe(el); });
+})();
+
+/* ---------- carousels: swipe, arrows, dots, gentle autoplay while visible ---------- */
+document.querySelectorAll('[data-carousel]').forEach(c => {
+  const track = c.querySelector('.track'), slides = [...c.querySelectorAll('.slide')];
+  const dots = c.querySelector('.dots');
+  if (dots) slides.forEach(() => dots.appendChild(document.createElement('i')));
+  let cur = 0, timer = null, visible = false, paused = false;
+  const mark = i => {
+    cur = i;
+    slides.forEach((s, k) => s.classList.toggle('cur', k === i));
+    if (dots) [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
+  };
+  const go = i => { i = (i + slides.length) % slides.length; track.scrollTo({ left: slides[i].offsetLeft, behavior: 'smooth' }); mark(i); };
+  mark(0);
+  let t;
+  track.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => mark(Math.round(track.scrollLeft / track.clientWidth)), 80); }, { passive: true });
+  const prev = c.querySelector('.prev'), next = c.querySelector('.next');
+  if (prev) prev.addEventListener('click', e => { e.stopPropagation(); paused = true; go(cur - 1); });
+  if (next) next.addEventListener('click', e => { e.stopPropagation(); paused = true; go(cur + 1); });
+  ['pointerdown', 'touchstart'].forEach(ev => track.addEventListener(ev, () => { paused = true; }, { passive: true }));
+  c.addEventListener('mouseenter', () => { paused = true; });
+  c.addEventListener('mouseleave', () => { paused = false; });
+  if (slides.length > 1 && !reduceMotion && 'IntersectionObserver' in window) {
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }, { threshold: .5 }).observe(c);
+    timer = setInterval(() => { if (visible && !paused && !document.hidden) go(cur + 1); }, 4500);
+  }
+});
+
+/* ---------- Life at Daniels: cross-fading photo slideshow ---------- */
+document.querySelectorAll('.show-slides').forEach(box => {
+  const s = [...box.querySelectorAll('.s')];
+  if (s.length < 2 || reduceMotion) return;
+  let i = 0;
+  setInterval(() => {
+    if (document.hidden) return;
+    s[i].classList.remove('on'); i = (i + 1) % s.length;
+    const img = s[i].querySelector('img'); if (img.loading === 'lazy') img.loading = 'eager';
+    s[i].classList.add('on');
+  }, 5000);
+});
+
+/* ---------- Learning: five areas explorer ---------- */
+document.querySelectorAll('.areas-x').forEach(x => {
+  x.querySelectorAll('.a-tabs button').forEach(b => b.addEventListener('click', () => {
+    x.querySelectorAll('.a-tabs button').forEach(o => { o.classList.toggle('on', o === b); o.setAttribute('aria-selected', o === b); });
+    x.querySelectorAll('.a-panel').forEach(p => p.classList.toggle('on', p.id === 'area-' + b.dataset.area));
+  }));
+});
