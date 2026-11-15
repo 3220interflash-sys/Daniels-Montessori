@@ -46,7 +46,7 @@ const filters = document.querySelector('.filters');
 if (filters) filters.addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
   filters.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
-  document.querySelectorAll('.masonry a').forEach(a => a.classList.toggle('hide', b.dataset.f !== 'all' && a.dataset.c !== b.dataset.f));
+  document.querySelectorAll('.photo-grid a, .masonry a').forEach(a => a.classList.toggle('hide', b.dataset.f !== 'all' && a.dataset.c !== b.dataset.f));
 });
 
 /* curriculum term tabs (opens on the current term) */
